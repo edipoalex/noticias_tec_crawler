@@ -66,16 +66,8 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'ONCASE_NOTICIAS.pipelines.OncaseNoticiasPipeline': 10,
-    #'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 20,
-    #'ONCASE_NOTICIAS.pipelines.MongoPipeline': 30,
 }
 
-ELASTICSEARCH_SERVER            = 'localhost'   # Endereço do nosso servidor do Elastic
-ELASTICSEARCH_PORT              = 9200          # Porta
-ELASTICSEARCH_INDEX             = 'target'      # Nome do nosso index (banco de dados)
-ELASTICSEARCH_TYPE              = 'noticias'    # Nome do doctype (tabela)
-ELASTICSEARCH_UNIQ_KEY          = 'link'         # Configuramos a URL como sendo nosso valor único
-ELASTICSEARCH_BUFFER_LENGTH     = 100            # Quantidade de registro armazenados em memória para realizar o insert
 
 
 # Enable and configure the AutoThrottle extension (disabled by default)
