@@ -18,22 +18,11 @@ class TecnoblogSpider(scrapy.Spider):
 
     def parse_article(self, response):
       link   = response.url
-      title  = response.css('title ::text').extract_first()
-      author = response.css('span.author ::text').extract_first()
-      text   =  "".join(response.css('div.entry ::text').extract())
-      data   = None # response.css("meta[property=article:published_time] ::attr(content)").extract()
+      titulo  = response.css('title ::text').extract_first().strip()
+      autor = response.css('span.author ::text').extract_first().strip()
+      texto   =  "".join(response.css('div.entry ::text').extract()).strip()
+      data   = response.css('.by span::text')[1].extract().strip()
+      tags   =  ", ".join(response.css('.tags a::text').extract()).strip()
 
-      noticia = OncaseNoticiasItem(title=title, author=author, text=text, link=link, data=data)
+      noticia = OncaseNoticiasItem(titulo=titulo, autor=autor, texto=texto, link=link, data=data, tags=tags)
       yield noticia
-
-    '''def parse(self, response):
-        for article in response.css("article"):
-        	link    = article.css("div.texts h2 a::attr(href)").extract_first()
-        	title   = article.css("div.texts h2 a::text").extract_first()
-        	author  = article.css("div.texts div.info a::text").extract_first()
-        	texto   = article.css("div.texts div.entry p::text").extract_first()
-
-        	noticia = OncaseNoticiasItem(title=title, author=author, link=link, texto=texto)
-
-        	yield noticia
-        	# {'link': link, 'title': title, 'author': author, 'texto': texto}'''

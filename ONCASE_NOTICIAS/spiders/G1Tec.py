@@ -17,10 +17,11 @@ class G1tecSpider(scrapy.Spider):
 
     def parse_article(self, response):
       link   = response.url
-      title = response.css('div.title h1::text').extract_first()
-      data = response.css('time::text').extract_first()
-      author = response.css('.content-publication-data__from ::text').extract_first()
-      text = "".join(response.css(
-                '.mc-article-body p::text').extract())
-      noticia = OncaseNoticiasItem(title=title, author=author, text=text, link=link, data=data)
+      titulo = response.css('div.title h1::text').extract_first().strip()
+      data = response.css('time::text').extract_first().strip()
+      autor = response.css('.content-publication-data__from ::text').extract_first().strip()
+      texto = "".join(response.css('.mc-article-body p::text').extract()).strip()
+      tags  = ", ".join(response.css('.entities .entities__list-item a::text').extract()).strip()
+
+      noticia = OncaseNoticiasItem(titulo=titulo, autor=autor, texto=texto, link=link, data=data, tags=tags)
       yield noticia

@@ -16,13 +16,11 @@ import types
 import pymongo
 
 class OncaseNoticiasPipeline(object):
-	collection_name = 'noticias_tec'
+	collection_name = 'NOTICIAS'
 	def __init__(self, mongo_uri, mongo_db):
 		self.mongo_uri = mongo_uri
 		self.mongo_db = mongo_db
-	 	# self.file = open("noticias.json", 'wb')
-	 	# self.exporter = JsonItemExporter(self.file, encoding='utf-8', ensure_ascii=False)
-	 	# self.exporter.start_exporting()
+
 
 	@classmethod
 	def from_crawler(cls, crawler):
@@ -36,18 +34,16 @@ class OncaseNoticiasPipeline(object):
 		self.db = self.client[self.mongo_db]
 
 	def close_spider(self, spider):
-	 	self.exporter.finish_exporting()
-	 	self.file.close()
+	 	self.client.close()
 
 	def process_item(self, item, spider):
+		if item["autor"] is None:
+			item["autor"]="Não Informado"
+			
 		self.db[self.collection_name].find_one_and_update(
 			{"link": item["link"]},
 			{"$set": dict(item)},
 			upsert=True
 		)
 		return item
-		# self.db[self.collection_name].insert_one(dict(item))
-	 	# self.exporter.export_item(item)
-	 	# line =  json.dumps(dict(item)) + '\n'
-	 	# self.file.write(line)
-	 	
+

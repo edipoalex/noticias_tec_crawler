@@ -17,9 +17,10 @@ class TecmundotecSpider(scrapy.Spider):
 
     def parse_article(self, response):
       link   = response.url
-      title = response.css('title::text').extract_first()
-      data = response.css('time strong ::text').extract_first()
-      author = response.css('a.tec--author__info__link::text').extract_first()
-      text = "".join(response.css("div.p402_premium p::text").extract())
-      noticia = OncaseNoticiasItem(title=title, author=author, text=text, link=link, data=data)
+      titulo = response.css('title::text').extract_first().strip()
+      data = response.css('time strong ::text').extract_first().strip()
+      autor = response.css('a.tec--author__info__link::text').extract_first().strip()
+      texto = "".join(response.css("div.p402_premium p::text").extract()).strip()
+      tags = ", ".join(response.css(".z--px-16 a::text").extract()).strip()
+      noticia = OncaseNoticiasItem(titulo=titulo, autor=autor, texto=texto, link=link, data=data, tags=tags)
       yield noticia

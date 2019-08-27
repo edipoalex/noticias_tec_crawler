@@ -17,11 +17,13 @@ class ComputerworldSpider(scrapy.Spider):
 
 
     def parse_article(self, response):
-    	link   = response.url
-    	title  = response.css('title ::text').extract_first()
-    	author  = response.css('p.personalizado strong span::text').extract_first()
-    	text   =  "".join(response.css('div.p-lr-15 p::text').extract())
-    	data   = response.css('p.p-relative::text').extract_first().strip()
-    	noticia = OncaseNoticiasItem(title=title, author=author, link=link, text=text, data=data)
-    	yield noticia
+        link   = response.url
+        titulo  = response.css('title ::text').extract_first().strip()
+        autor  = response.css('p.personalizado strong span::text').extract_first().strip()
+        texto   =  "".join(response.css('div.p-lr-15 p::text').extract()).strip()
+        data   = response.css('p.p-relative::text').extract_first().strip()
+        tags   = ", ".join(response.css('.p-lr-15[id=tags] .conteudo a::text').extract()).strip()
+        
+        noticia = OncaseNoticiasItem(titulo=titulo, autor=autor, link=link, texto=texto, data=data, tags=tags)
+        yield noticia
         	

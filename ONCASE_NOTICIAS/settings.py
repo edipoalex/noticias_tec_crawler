@@ -66,7 +66,7 @@ ROBOTSTXT_OBEY = True
 # See https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 ITEM_PIPELINES = {
     'ONCASE_NOTICIAS.pipelines.OncaseNoticiasPipeline': 10,
-    'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 20,
+    #'scrapyelasticsearch.scrapyelasticsearch.ElasticSearchPipeline': 20,
     #'ONCASE_NOTICIAS.pipelines.MongoPipeline': 30,
 }
 
