@@ -6,6 +6,7 @@
 # See: https://docs.scrapy.org/en/latest/topics/item-pipeline.html
 from scrapy.exporters import JsonItemExporter
 
+from datetime import date
 from datetime import datetime
 from elasticsearch import Elasticsearch, helpers
 from six import string_types
@@ -71,6 +72,9 @@ class OncaseNoticiasPipeline(object):
 		#item["top_palavras"] = self.top_words(regex.sub(r'["-,”“.:@#?!&$]', ' ', item["texto"]))
 		item["qtd_palavras"] = self.proc_words(item["texto"])
 		item["top_palavras"] = self.top_words(item["texto"])
+		item["dt_captura"] = str(date.today())
+		item["data"] = str(datetime.strptime(item["data"][0:10], '%d/%m/%Y').date())
+		
 
 		self.db[self.collection_name].find_one_and_update(
 			{"link": item["link"]},
