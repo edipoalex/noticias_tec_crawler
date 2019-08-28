@@ -17,3 +17,6 @@ class OncaseNoticiasItem(scrapy.Item):
     link = scrapy.Field()
     data = scrapy.Field()
     tags = scrapy.Field()
+    qtd_palavras = scrapy.Field()
+    top_palavras = scrapy.Field()
+    dt_aquisicao = scrapy.Field()
