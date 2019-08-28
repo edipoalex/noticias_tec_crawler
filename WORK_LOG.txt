@@ -1,0 +1,199 @@
+------------------------------------------------------------------------------------------------------------
+***************************************ATIVIDADES***********************************************************
+------------------------------------------------------------------------------------------------------------
+24/08/2019:
+ - Inicio da preparação do ambiente para desenvolvimento do crawler(instalação e configuração python, scrapy, git);
+ - Inicio do desenvolvimento do crawler utilizando o framework scrapy;
+ - Análise da página do G1 para definição das tags para captura pelo crawler;
+25/08/2019:
+ - Desenvolvimento do spider de captura do G1 com base no mapeamento das tags analisadas;
+ - Teste unitário do spider G1Tec.py;
+ - Análise da página do ComputerWorld para definição das tags para captura pelo crawler;
+ - Desenvolvimento do spider de captura do ComputerWorld com base no mapeamento das tags analisadas;
+ - Teste unitário do spider ComputerWorld.py;
+ - Análise da página do Tecnoblog para definição das tags para captura pelo crawler;
+ - Desenvolvimento do spider de captura do Tecnoblog com base no mapeamento das tags analisadas;
+ - Teste unitário do spider Tecnoblog.py;
+ - Análise da página do TecMundo para definição das tags para captura pelo crawler;
+ - Desenvolvimento do spider de captura do TecMundo com base no mapeamento das tags analisadas;
+ - Teste unitário do spider TecMundoTec.py;
+26/08/2019:
+ - Desenvolvimento da integração do crawler com o ElasticSearch;
+ - Teste unitário dos spiders(G1Tec, ComputerWorld, Tecnoblog, TecMundoTec) integrando com ElasticSearch;
+ - Desenvolvimento da integração do crawler com o MongoDB;
+ - Teste unitário dos spiders(G1Tec, ComputerWorld, Tecnoblog, TecMundoTec) integrando com MongoDB;
+ - Remoção da integração do crawler com o ElasticSearch
+ - Teste unitário dos spiders(G1Tec, ComputerWorld, Tecnoblog, TecMundoTec) integrando com MongoDB;
+ - Solução de problema de comunicação do git com github(porta 22 bloqueada não permitindo push do git(master) para o github(master));
+ - Realizado commit e push do projeto para a master no github(versão inicial)
+27/08/2019:
+ - Alteração do crawler para inclusão de métricas(contagem de palavras, ranking das 10 palavras mais frequentes no artigo);
+ - Alteração do crawler para incluir a data de captura dos artigos;
+28/08/2019:
+ - Complementação da documentação do projeto; 
+ 
+ 
+------------------------------------------------------------------------------------------------------------
+************************************TOMADA DE DECISÕES******************************************************
+------------------------------------------------------------------------------------------------------------
+Definição de tecnologia à utilizar:
+Optei pela utilização do Python por ser uma linguagem de alta, simples e bastante utilizada em projetos de Big Data,
+além de ser a linguagem na qual estou focando meus esforços de aprendizado;
+
+Definição do framework:
+Pesquisando e estudando, foi possível identificar que o Scrapy é um framework escrito em Python puro e bastante utilizado para
+o desenvolvimento de crawler atualmente. Por ser simples de trabalhar, achei a melhor opção;
+
+Definição de armazenamento dos dados:
+Inicialmente fiquei em dúvida entre o ElasticSearch e o MongoDB, pois ambos possuem premissas de terem uma alta capacidade de 
+disponibilidade, escalabilidade, resiliência além de fácil instação e configuração. Ambos trabalham com particionamento de dados,
+são opensource e possuem uma grande comunidade ativa.
+Acabei optando por iniciar o projeto com o ElasticSearch, pois já o conhecia e já tinha trabalhado academicamente com ele.
+Porém, estudando um pouco mais o MongoDB e diante da necessidade de escalar a solução, percebi que este atenderia melhor a 
+necessidade do projeto, uma vez que sua principal caracteristica é schema-free, ou seja, os registros não precisam ter uma 
+estrutura uniforme, com isso, no futuro é possível alterar o crawler para capturar mais algum dado mantendo o mesmo repositório
+e schema, sem necessidade de alterar a estrutura, pois o MongoDB que é uma base NOSql, aceita registros com colunas diferentes.
+Por fim, conclui que ambos atenderiam o projeto, pois o ElasticSearch tem mum alto poder de indexação, e para processos de analytics
+é uma opção bastante viável. O projeto poderia trabalhar em paralelo com ambos, mas por ora, deixei rodando apenas o MongoDB.
+
+------------------------------------------------------------------------------------------------------------
+*************************************************ANÁLISES***************************************************
+------------------------------------------------------------------------------------------------------------
+
+Dentre as análises que poderiam ser realizadas:
+ - Quantidade de artigos por portal;
+ - Quantidade de artigos por autor;
+ - Mapa de palavras mais citadas: 
+	- geral
+	- por portal
+	- por autor
+	- por data;
+ - Mapa de Tags mais utilizadas: 
+	- geral
+	- por portal
+	- por autor
+	- por data
+ - Top artigos com mais palavras:
+	- geral
+	- por portal
+	- por autor
+	- por data
+ - Quantidade de autores por portal;
+
+
+------------------------------------------------------------------------------------------------------------
+************************************LOG DE EXECUÇÃO DO SPIDERS**********************************************
+------------------------------------------------------------------------------------------------------------
+
+-------------------------------------ComputerWorld----------------------------------------------------------
+2019-08-28 12:57:38 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 5537,
+ 'downloader/request_count': 18,
+ 'downloader/request_method_count/GET': 18,
+ 'downloader/response_bytes': 274701,
+ 'downloader/response_count': 18,
+ 'downloader/response_status_count/200': 15,
+ 'downloader/response_status_count/301': 3,
+ 'elapsed_time_seconds': 3.789837,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 8, 28, 15, 57, 38, 146653),
+ 'item_scraped_count': 12,
+ 'log_count/DEBUG': 31,
+ 'log_count/ERROR': 1,
+ 'log_count/INFO': 10,
+ 'request_depth_max': 1,
+ 'response_received_count': 15,
+ 'robotstxt/request_count': 1,
+ 'robotstxt/response_count': 1,
+ 'robotstxt/response_status_count/200': 1,
+ 'scheduler/dequeued': 16,
+ 'scheduler/dequeued/memory': 16,
+ 'scheduler/enqueued': 16,
+ 'scheduler/enqueued/memory': 16,
+ 'spider_exceptions/AttributeError': 1,
+ 'start_time': datetime.datetime(2019, 8, 28, 15, 57, 34, 356816)}
+2019-08-28 12:57:38 [scrapy.core.engine] INFO: Spider closed (finished)
+
+-------------------------------------TecMundoTec----------------------------------------------------------
+2019-08-28 16:39:24 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 7994,
+ 'downloader/request_count': 22,
+ 'downloader/request_method_count/GET': 22,
+ 'downloader/response_bytes': 268658,
+ 'downloader/response_count': 22,
+ 'downloader/response_status_count/200': 22,
+ 'elapsed_time_seconds': 4.746317,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 8, 28, 19, 39, 24, 496700),
+ 'item_scraped_count': 18,
+ 'log_count/DEBUG': 41,
+ 'log_count/ERROR': 2,
+ 'log_count/INFO': 10,
+ 'request_depth_max': 1,
+ 'response_received_count': 22,
+ 'robotstxt/request_count': 1,
+ 'robotstxt/response_count': 1,
+ 'robotstxt/response_status_count/200': 1,
+ 'scheduler/dequeued': 21,
+ 'scheduler/dequeued/memory': 21,
+ 'scheduler/enqueued': 21,
+ 'scheduler/enqueued/memory': 21,
+ 'spider_exceptions/AttributeError': 1,
+ 'start_time': datetime.datetime(2019, 8, 28, 19, 39, 19, 750383)}
+2019-08-28 16:39:24 [scrapy.core.engine] INFO: Spider closed (finished)
+
+-------------------------------------Tecnoblog----------------------------------------------------------
+2019-08-28 16:40:01 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 6129,
+ 'downloader/request_count': 18,
+ 'downloader/request_method_count/GET': 18,
+ 'downloader/response_bytes': 232549,
+ 'downloader/response_count': 18,
+ 'downloader/response_status_count/200': 16,
+ 'downloader/response_status_count/301': 2,
+ 'elapsed_time_seconds': 2.099506,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 8, 28, 19, 40, 1, 886906),
+ 'item_scraped_count': 14,
+ 'log_count/DEBUG': 33,
+ 'log_count/ERROR': 1,
+ 'log_count/INFO': 10,
+ 'request_depth_max': 1,
+ 'response_received_count': 16,
+ 'robotstxt/request_count': 1,
+ 'robotstxt/response_count': 1,
+ 'robotstxt/response_status_count/200': 1,
+ 'scheduler/dequeued': 16,
+ 'scheduler/dequeued/memory': 16,
+ 'scheduler/enqueued': 16,
+ 'scheduler/enqueued/memory': 16,
+ 'spider_exceptions/ValueError': 1,
+ 'start_time': datetime.datetime(2019, 8, 28, 19, 39, 59, 787400)}
+2019-08-28 16:40:01 [scrapy.core.engine] INFO: Spider closed (finished)
+
+-------------------------------------G1Tec----------------------------------------------------------
+2019-08-28 16:40:33 [scrapy.statscollectors] INFO: Dumping Scrapy stats:
+{'downloader/request_bytes': 4629,
+ 'downloader/request_count': 14,
+ 'downloader/request_method_count/GET': 14,
+ 'downloader/response_bytes': 1211092,
+ 'downloader/response_count': 14,
+ 'downloader/response_status_count/200': 12,
+ 'downloader/response_status_count/301': 2,
+ 'elapsed_time_seconds': 4.024243,
+ 'finish_reason': 'finished',
+ 'finish_time': datetime.datetime(2019, 8, 28, 19, 40, 33, 643608),
+ 'item_scraped_count': 10,
+ 'log_count/DEBUG': 25,
+ 'log_count/INFO': 10,
+ 'request_depth_max': 1,
+ 'response_received_count': 12,
+ 'robotstxt/request_count': 1,
+ 'robotstxt/response_count': 1,
+ 'robotstxt/response_status_count/200': 1,
+ 'scheduler/dequeued': 13,
+ 'scheduler/dequeued/memory': 13,
+ 'scheduler/enqueued': 13,
+ 'scheduler/enqueued/memory': 13,
+ 'start_time': datetime.datetime(2019, 8, 28, 19, 40, 29, 619365)}
+2019-08-28 16:40:33 [scrapy.core.engine] INFO: Spider closed (finished)
