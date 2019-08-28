@@ -184,3 +184,24 @@ Para testar uma conxão, vamos utilizar o comando:
 $ mongo
 
 Fonte: https://www.oficinadanet.com.br/post/13367-instalando-mongodb-no-mac-os-x
+
+--------------------------------------------------------------------------------
+***************COMANDOS PARA EXECUTAR OS SPIDERS********************************
+--------------------------------------------------------------------------------
+
+scrapy runspider ONCASE_NOTICIAS/spiders/G1Tec.py
+
+scrapy runspider ONCASE_NOTICIAS/spiders/TecMundoTec.py
+
+scrapy runspider ONCASE_NOTICIAS/spiders/ComputerWorld.py
+
+scrapy runspider ONCASE_NOTICIAS/spiders/Tecnoblog.py
+
+--------------------------------------------------------------------------------
+***************COMANDOS CONSULTAR OS DOCUMENTOS NO MONGODB**********************
+--------------------------------------------------------------------------------
+Selecionar o db:
+use ONCASE_NOTICIAS
+
+Executar consulta na collection NOTICIAS:
+db.NOTICIAS.find()
