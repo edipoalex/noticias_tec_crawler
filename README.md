@@ -92,9 +92,11 @@ Se você estiver usando o Anaconda ou Miniconda , você pode instalar o pacote a
 Para instalar o Scrapy usando conda, execute:
 
 conda install -c conda-forge scrapy
+
 Alternativamente, se você já está familiarizado com a instalação de pacotes Python, você pode instalar o Scrapy e suas dependências do PyPI com:
 
 pip install Scrapy
+
 Observe que, às vezes, isso pode exigir a solução de problemas de compilação para algumas dependências do Scrapy, dependendo do sistema operacional. Portanto, verifique as notas de instalação específicas da plataforma .
 
 É altamente recomendável que você instale o Scrapy em um virtualenv dedicado , para evitar conflitos com os pacotes do sistema.
@@ -188,6 +190,12 @@ Fonte: https://www.oficinadanet.com.br/post/13367-instalando-mongodb-no-mac-os-x
 --------------------------------------------------------------------------------
 ***************COMANDOS PARA EXECUTAR OS SPIDERS********************************
 --------------------------------------------------------------------------------
+Todos spiders de uma vez:
+
+python noticias_tec_crawler/noticias_tec.py
+
+
+OU é possível executar os spiders individualmente:
 
 scrapy runspider ONCASE_NOTICIAS/spiders/G1Tec.py
 
